@@ -4,7 +4,8 @@ import cookieParser from "cookie-parser";
 
 import user from "./src/routes/user.js";
 import post from "./src/routes/post.js";
-import search from "./src/routes/search.js";
+
+import consumePostDeletion from "./src/services/rabbitmq/consumePostDeletion.js";
 
 const app = express();
 
@@ -14,7 +15,7 @@ app.use(cookieParser());
 
 app.use("/admin/user", user);
 app.use("/admin/post", post);
-app.use("/admin/search", search);
+consumePostDeletion();
 
 app.get("/bruh", (req, res) => {
     res.send("Hello World!");
